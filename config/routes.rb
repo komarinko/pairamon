@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  root 'post_images#top'
   devise_for :users
+  resources :post_images, only: [:index, :show, :new, :create]
+  resources :users, only: [:index, :show, :edit, :update, :destroy]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

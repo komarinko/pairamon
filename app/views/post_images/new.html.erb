@@ -1,0 +1,27 @@
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+
+		<div class="col-md-4">
+		</div>
+		<div class="col-md-4">
+            <%= form_for(@post_image, url: post_images_path) do |f| %>
+            <div class="form-group">
+              <%= f.attachment_field :image, placeholder: "プロフィール画像", class: "img-responsive center-block" %>
+            </div>
+            <div class="form-group">
+              <%= f.text_field :caption, class: "center-block form-control", placeholder: "画像コメントを入力" %>
+            </div>
+
+            <div class="form-group">
+              <%= f.submit "投稿", class: "btn btn-success center-block btn-block" %>
+            </div>
+            <% end %>
+		</div>
+		<div class="col-md-4">
+		</div>
+
+    </div>
+  </div>
+</div>
