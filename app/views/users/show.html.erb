@@ -48,7 +48,7 @@
 			<div style="height:600px; width:700px; background-color:blue; overflow-y:scroll;">
 				<div class="form-control">
 					<% @post_images.each do |post_image| %>
-					<%= attachment_image_tag post_image, :image %><br>
+					<%= attachment_image_tag post_image, :image, size: "550x550" %><br>
 					<div class="well well-sm">
 					<%= post_image.caption %>
 					</div>
