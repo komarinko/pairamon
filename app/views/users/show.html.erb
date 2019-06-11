@@ -46,12 +46,28 @@
     <div class="row">
 	    <div class ="col-md-8">
 			<div style="height:600px; width:700px; background-color:blue; overflow-y:scroll;">
-				セル2aaaaaaaaaaaaaaaaaaaaaaaa
+				<div class="form-control">
+					<% @post_images.each do |post_image| %>
+					<%= attachment_image_tag post_image, :image %><br>
+					<div class="well well-sm">
+					<%= post_image.caption %>
+					</div>
+					<% end %>
+				</div>
 			</div>
 		</div>
 	       <div class ="col-md-4">
 			<div style="height:600px; width:400px; background-color:red;  overflow-y:scroll;">
-				セル2aaaaaaaaaaaaaaaaaaaaaaaa
+				<div class="form-control">
+				<% @user.post_comments.reverse.each do |post_comment| %>
+					<div class="well well-sm">
+						id：<%= post_comment.user_id %>
+						<%= post_comment.user.name %>
+						<%= post_comment.created_at.strftime('%m/%d　%H時%M分') %><br>
+						<%= post_comment.comment %>
+					</div>
+				<% end %>
+				</div>
 			</div>
 		</div>
     </div>
@@ -60,11 +76,13 @@
         <div class ="col-md-3">
         	<%= link_to "画像投稿", new_post_image_path, class:"btn btn-info center-block btn-block" %>
         </div>
+        <%= form_for [@user, @post_comment] do |f| %>
         <div class ="col-md-6 form-group">
-        	<input type="text" name="name" class="center-block form-control" placeholder="フリートーク欄にコメントを入力する">
+        	 <%= f.text_area :comment, class: "form-control",placeholder: "コメントをここに" %>
         </div>
-        <div class ="col-md-3">
-        	<div class="btn btn-success center-block btn-block">送信</div>
+        <div class ="col-md-3 form-group">
+        	<%= f.submit "送信する",  class: "btn btn-info center-block btn-block" %>
         </div>
+        <% end %>
 	</div>
 </div>
