@@ -61,9 +61,9 @@
 				<div class="form-control">
 				<% @user.post_comments.reverse.each do |post_comment| %>
 					<div class="well well-sm">
-						id：<%= post_comment.post_image_id %>
-						<%= post_comment.writer_id %>
-						<%= post_comment.created_at.strftime('%m/%d　%H時%M分') %><br>
+						id：<%= post_comment.user.id %>
+						<%= post_comment.user.name %>
+						<%= post_comment.created_at.strftime('%m/%d %H時%M分') %><br>
 						<%= post_comment.comment %>
 					</div>
 				<% end %>
