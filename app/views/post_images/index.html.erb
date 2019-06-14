@@ -1,69 +1,33 @@
-<h1>画像一覧画面</h1>
-
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-12">
-        <% @post_images.each do |post_image| %>
+          <div class="col-md-4">
+          </div>
+          <div class="col-md-4">
+            <%= render 'layouts/search_image' %>
+          </div>
+          <div class="col-md-4">
+          </div>
+        </div>
+        </div>
+    <div class="row">
+      <div class="col-md-12">
+        <% @results.each do |post_image| %>
         <div class="col-md-2">
             <section class="">
               <%= attachment_image_tag post_image, :image, size: "250x200", format: 'png', fallback: "" %>
             </section>
         </div>
         <% end %>
-
-        <div class="col-md-2">
-            <section class="">
-              <img src= "http://placehold.jp/24/cccccc/ffffff/250x200.png?text=placehold.jp" %>
-            </section>
         </div>
-
-        <div class="col-md-2">
-            <section class="">
-              <img src= "http://placehold.jp/24/cccccc/ffffff/250x200.png?text=placehold.jp" %>
-            </section>
-        </div>
-
-        <div class="col-md-2">
-            <section class="">
-              <img src= "http://placehold.jp/24/cccccc/ffffff/250x200.png?text=placehold.jp" %>
-            </section>
-        </div>
-
-        <div class="col-md-2">
-            <section class="">
-              <img src= "http://placehold.jp/24/cccccc/ffffff/250x200.png?text=placehold.jp" %>
-            </section>
-        </div>
-
-        <div class="col-md-2">
-            <section class="">
-              <img src= "http://placehold.jp/24/cccccc/ffffff/250x200.png?text=placehold.jp" %>
-            </section>
-        </div>
-
-        <div class="col-md-2">
-            <section class="">
-              <img src= "http://placehold.jp/24/cccccc/ffffff/250x200.png?text=placehold.jp" %>
-            </section>
-        </div>
-
-        <div class="col-md-2">
-            <section class="">
-              <img src= "http://placehold.jp/24/cccccc/ffffff/250x200.png?text=placehold.jp" %>
-            </section>
-        </div>
-
-        <div class="col-md-2">
-            <section class="">
-              <img src= "http://placehold.jp/24/cccccc/ffffff/250x200.png?text=placehold.jp" %>
-            </section>
-        </div>
-
-        <div class="col-md-2">
-            <section class="">
-              <img src= "http://placehold.jp/24/cccccc/ffffff/250x200.png?text=placehold.jp" %>
-            </section>
+        <div class="row">
+          <div class="col-md-4">
+          </div>
+          <div class="col-md-4">
+          <%= paginate @results, class: "paginate center-block" %>
+          </div>
+          <div class="col-md-4">
+          </div>
         </div>
       </div>
     </div>
-  </div>

@@ -1,6 +1,9 @@
 class UsersController < ApplicationController
 	def index
-		@users = User.all
+	    # (params[:q])に検索パラメーターが入り、Productテーブルを検索する@qオブジェクトを生成
+	    @search = User.ransack(params[:q])
+	    # 検索結果を表示
+	    @results = @search.result.page(params[:page]).reverse_order.per(20)
 	end
 
 	def show

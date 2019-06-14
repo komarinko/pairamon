@@ -1,0 +1,10 @@
+<form class="navbar-form navbar-center" role="search">
+  <div class="form-group">
+    <%= search_form_for @search do |f| %>
+      <!-- 検索値を含むレコードを検索 -->
+      <%= f.search_field :user_id_eq, class: "form-control", placeholder: "ユーザーidを入力" %>
+      <%= f.search_field :caption_cont, class: "form-control", placeholder: "画像コメントを入力" %>
+      <%= f.submit "検索" %>
+    <% end %>
+  </div>
+</form>

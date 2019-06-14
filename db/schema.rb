@@ -10,7 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_12_072852) do
+ActiveRecord::Schema.define(version: 2019_06_13_062313) do
+
+  create_table "favorites", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "post_image_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.text "sidecomment"
+    t.integer "person_id"
+    t.integer "sideperson_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["person_id"], name: "index_messages_on_person_id"
+    t.index ["sideperson_id"], name: "index_messages_on_sideperson_id"
+  end
 
   create_table "post_comments", force: :cascade do |t|
     t.text "comment"

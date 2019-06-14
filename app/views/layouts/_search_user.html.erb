@@ -1,0 +1,12 @@
+<form class="navbar-form navbar-center" role="search">
+  <div class="form-group">
+    <%= search_form_for @search do |f| %>
+      <!-- 検索値を含むレコードを検索 -->
+      <%= f.search_field :id_eq, class: "form-control", placeholder: "ユーザーidを入力" %>
+      <%= f.search_field :name_cont, class: "form-control", placeholder: "ユーザー名を入力" %>
+      <%= f.search_field :fav_manga_cont, class: "form-control", placeholder: "好きな漫画を入力" %>
+      <%= f.search_field :fav_illust_cont, class: "form-control", placeholder: "好きなイラストを入力" %>
+      <%= f.submit "検索" %>
+    <% end %>
+  </div>
+</form>

@@ -2,7 +2,7 @@
     <div class="row">
         <div class ="col-md-12">
         	<div class ="col-md-6">
-        		<img src= "http://placehold.jp/24/cccccc/ffffff/400x400.png?text=placehold.jp">
+        		<p><%= attachment_image_tag @user, :profile_image,　format: 'jpeg', fallback: "no_image.jpg", size: "400x400" %></p>
         	</div>
         	<div class ="col-md-6 ">
 				<h1 class="text-center">ユーザー編集画面</h1>
@@ -10,7 +10,7 @@
 					<%= form_for(@user) do |f| %>
 					<p>ユーザー名：<%= f.text_field :name, autofocus: true, autocomplete: "Name", class:"form-control" %></p>
 					<p>メールアドレス：<%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-control" %></p>
-
+				<p><%= f.attachment_field :profile_image, placeholder: "プロフィール画像", class: "user_image" %></p>
 					<p>好きな漫画：<%= f.text_field :fav_manga, autofocus: true, autocomplete: "fav_manga", class:"form-control" %></p>
 					<p>好きなイラスト：<%= f.text_field :fav_illust, autofocus: true, autocomplete: "fav_illust", class:"form-control" %></p>
 					<p><%= f.submit "変更を保存", class:"btn btn-success center-block btn-block" %></p>
