@@ -1,42 +1,47 @@
-<div class="containe">
+<div class="container-fluid top-blank">
     <div class="row">
         <div class ="col-md-12">
-          <div class="col-md-4">
+          <div class="col-md-3">
           </div>
-          <div class="col-md-4">
+          <div class="col-md-7">
         	<%= render 'layouts/search_user' %>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-1">
           </div>
          </div>
     </div>
     <div class="row">
         <div class ="col-md-12">
-        	<div class="table-responsive">
 
 			  <table class="table table-hover">
 			  	<thead>
 			  		<tr>
 			  			<th>ID</th>
 			  			<th></th>
-			  			<th>ユーザー名</th>
-			  			<th>好きな漫画</th>
-			  			<th>好きなイラスト</th>
+			  			<th>ユーザー名<br>好きな漫画・イラスト</th>
 			  		</tr>
 			  	</thead>
 			  	<% @results.each do |user| %>
 	                <tr>
-	                    <td><%= user.id %></td>
-	                	<td><%= attachment_image_tag user, :profile_image,　format: 'jpeg', fallback: "no_image.jpg", size: "100x100" %></td>
-	                    <td><%= user.name %></td>
-	                    <td><%= user.fav_manga %></td>
-	                    <td><%= user.fav_illust %></td>
-	                    <td><%= link_to "詳細", user_path(user.id), class:"btn btn-info center-block btn-block" %></td>
-	                    <td><button type="button" class="btn btn-danger center-block btn-block">削除</button></td>
+	                    <td><%= user.id %>　<%= attachment_image_tag user, :profile_image,　format: 'jpeg', fallback: "/images/no_image.jpg", size: "80x80", class: "img-circle" %></td>
+	                	<td></td>
+	                    <td><%= user.name %><br><br><%= user.fav_manga %><br><%= user.fav_illust %></td>
+	                    <td></td>
+	                    <td><%= link_to "詳細", user_path(user.id), class: "btn btn-info center-block btn-block" %></td>
 	                </tr>
 	            <% end %>
 	           </table>
-       	  	</div>
           </div>
      </div>
+      <div class="row">
+          <div class="col-md-12">
+          <div class="col-md-4">
+          </div>
+          <div class="col-md-4">
+          <%= paginate @results, class: "paginate center-block" %>
+          </div>
+          <div class="col-md-4">
+          </div>
+          </div>
+      </div>
 </div>

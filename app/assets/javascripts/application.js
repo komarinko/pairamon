@@ -12,7 +12,34 @@
 //
 //= require rails-ujs
 //= require activestorage
-//= require turbolinks
 //= require jquery
 //= require bootstrap-sprockets
 //= require_tree .
+
+
+$(function(){
+	$('.main_visual').hide().fadeIn(1500);
+	});
+
+$(function(){
+	$('.main_visual2').hide().fadeIn(4000);
+	});
+
+$(function(){
+	$('.menu-trigger').on('click', function(){
+		$(this).toggleClass('active');
+		$('#sp-menu').fadeToggle();
+		return false;
+	});
+});
+
+
+
+$(function(){
+	$('.gazo').on('click', function(){
+		$('.kieru, .kieru2').fadeToggle();
+	});
+});
+
+
+

@@ -1,9 +1,11 @@
 class UsersController < ApplicationController
+before_action :authenticate_user!, only: [:show, :edit]
+
 	def index
 	    # (params[:q])に検索パラメーターが入り、Productテーブルを検索する@qオブジェクトを生成
 	    @search = User.ransack(params[:q])
 	    # 検索結果を表示
-	    @results = @search.result.page(params[:page]).reverse_order.per(20)
+	    @results = @search.result.page(params[:page]).reverse_order.per(10)
 	end
 
 	def show
@@ -28,6 +30,9 @@ class UsersController < ApplicationController
 
 	def edit
 		@user = User.find(params[:id])
+		if @user.id != current_user.id
+			redirect_to root_path
+		end
 	end
 
 	def update
@@ -42,7 +47,7 @@ class UsersController < ApplicationController
 	def destroy
 	    @user = User.find(params[:id])
     	@user.destroy
-    	redirect_to users_path
+    	redirect_to user_path(@user.id)
 	end
 
 	private

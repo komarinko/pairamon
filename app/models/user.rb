@@ -5,8 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :post_images, dependent: :destroy
-  has_many :post_comments, class_name: 'PostComment', foreign_key: 'user_id', dependent: :delete_all
-  has_many :post_comments, class_name: 'PostComment', foreign_key: 'writer_id', dependent: :delete_all
+  has_many :post_comments, class_name: 'PostComment', foreign_key: 'user_id', dependent: :destroy
+  has_many :post_comments, class_name: 'PostComment', foreign_key: 'writer_id', dependent: :destroy
 
   has_many :favorites, dependent: :destroy
 
@@ -16,6 +16,11 @@ class User < ApplicationRecord
   has_many :passive_relationships, class_name: "Relationship", foreign_key: "following_id", dependent: :destroy
   has_many :following, through: :active_relationships, source: :following
   has_many :followers, through: :passive_relationships, source: :follower
+
+
+  validates :name, presence: true, length: { minimum: 2, maximum: 8 }
+  validates :fav_manga, length: { maximum: 50 }
+  validates :fav_illust, length: { maximum: 50 }
 
   def follow(other_user)
     active_relationships.create(following_id: other_user.id)

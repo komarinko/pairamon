@@ -1,1 +1,12 @@
-<h1>画像詳細画面</h1>
+
+<div class="container top-blank2">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+
+		<%= attachment_image_tag @post_image, :image, format: 'png', class: "center-block" %>
+                        <% if current_user == @post_image.user %>
+                        <%= link_to "削除", post_image_path(@post_image.id), method: :delete, "data-confirm" => "削除してもよろしいでしょうか？", class: "btn-sm btn-danger center-block text-center" %>
+                        <% end %>
+    </div>
+  </div>
+</div>

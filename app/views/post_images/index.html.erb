@@ -1,4 +1,5 @@
-  <div class="container-fluid">
+
+  <div class="container-fluid top-blank">
     <div class="row">
       <div class="col-md-12">
           <div class="col-md-4">
@@ -8,19 +9,42 @@
           </div>
           <div class="col-md-4">
           </div>
-        </div>
-        </div>
+      </div>
+    </div>
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-12 smalling">
         <% @results.each do |post_image| %>
-        <div class="col-md-2">
-            <section class="">
-              <%= attachment_image_tag post_image, :image, size: "250x200", format: 'png', fallback: "" %>
-            </section>
+        <div class="col-md-2 img-down">
+              <%= link_to user_path(post_image.user) do %>
+              <%= attachment_image_tag post_image.user, :profile_image,　format: 'jpeg', fallback: "no_image.jpg", size: "60x60", class: "img-circle img-down3" %>
+              <% end %>
+              <%= link_to post_image_path(post_image.id) do %>
+              <a href="<%= Refile.attachment_url(post_image, :image, format: 'png') %>", data-lity>
+              <%= attachment_image_tag post_image, :image, size: "250x250", format: 'png', class: "center-block " %>
+              </a>
+              <% end %>
         </div>
         <% end %>
+      </div>
+
+
+      <div class="col-xs-12 bigging">
+        <% @results.each do |post_image| %>
+        <div class="col-xs-3 img-down">
+              <%= link_to user_path(post_image.user) do %>
+              <%= attachment_image_tag post_image.user, :profile_image,　format: 'jpeg', fallback: "no_image.jpg", size: "20x20", class: "img-circle center-block img-down2" %>
+              <% end %>
+              <%= link_to post_image_path(post_image.id) do %>
+              <a href="<%= Refile.attachment_url(post_image, :image, format: 'png') %>", data-lity>
+              <%= attachment_image_tag post_image, :image, size: "80x80", format: 'png', class: "center-block " %>
+              </a>
+              <% end %>
         </div>
-        <div class="row">
+        <% end %>
+      </div>
+    </div>
+      <div class="row">
+          <div class="col-md-12">
           <div class="col-md-4">
           </div>
           <div class="col-md-4">
@@ -28,6 +52,7 @@
           </div>
           <div class="col-md-4">
           </div>
+          </div>
         </div>
-      </div>
+
     </div>

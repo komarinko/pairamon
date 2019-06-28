@@ -6,12 +6,35 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'  %>
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
   </head>
 
   <body>
+    <div id="sp-menu">
+      <ul>
+        <li><%= link_to "TOP", root_path, class: "navlink h4" %></li>
+        <li><%= link_to "ユーザー一覧", users_path, class: "navlink h4" %></li>
+        <li><%= link_to "画像一覧", post_images_path, class: "navlink h4" %></li>
+        <% unless user_signed_in? %>
+        <li><%= link_to "ログイン", new_user_session_path, class: "navlink h4" %></li>
+        <% end %>
+        <% if user_signed_in? %>
+        <li><%= link_to "マイページ", user_path(current_user), class: "navlink h4" %></li>
+        <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "navlink h4" %></li>
+        <% end %>
+      </ul>
+    </div>
+    <div id="hm-icon">
+      <a class="menu-trigger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </a>
+    </div>
+
+
+
     <%= render 'layouts/header' %>
     <%= yield %>
     <%= render 'layouts/footer' %>

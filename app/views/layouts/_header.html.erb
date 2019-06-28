@@ -2,20 +2,20 @@
 	<nav class="navbar navbar-default navbar-static-top">
 	<div class="container-fluid">
 		<div class="navbar-header">
-			<a class="navbar-brand" href="#">
-				タイトル
-			</a>
 			<ul class="nav navbar-nav">
 				<li><%= link_to "TOP", root_path %></li>
-				<li class="active"><%= link_to "ユーザー一覧", users_path %></li>
+				<li class=""><%= link_to "ユーザー一覧", users_path %></li>
 				<li><%= link_to "画像一覧", post_images_path %></li>
 			</ul>
 		</div>
-		<% if user_signed_in? %>
 		<div class="navbar-header navbar-right">
 			<ul class="nav navbar-nav">
+				<% unless user_signed_in? %>
+				<li><%= link_to "ログイン", new_user_session_path %></li>
+				<% end %>
+				<% if user_signed_in? %>
 				<li><%= link_to "マイページ", user_path(current_user) %></li>
-				<li class="active"><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+				<li class=""><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
 			</ul>
 		</div>
 		<% end %>

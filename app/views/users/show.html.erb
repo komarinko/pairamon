@@ -1,13 +1,14 @@
-<div class="container">
+<div class="container-fluid top-blank2">
     <div class="row">
-        <div class ="col-md-12">
-			<table border="1" width="200" height="100" bgcolor="#9999ff">
+        <div class ="col-md-8 col-md-offset-2 kieru">
+            <p class="success_message" role="alert"><%= flash[:success] %></p>
+			<table width="100%" height="60" bgcolor="#9999ff">
 				<tr>
-					<td width="100" height="100">
-					<div style="height:100px; width:1180px; overflow-x:auto;overflow-y:hidden;">
+					<td width="100" height="60">
+					<div style="height:60px; width:100%; overflow-x:auto;">
                         <% @user.following.each do |user| %>
                         <%= link_to user_path(user) do %>
-                        <%= attachment_image_tag user, :profile_image,　format: 'jpeg', fallback: "no_image.jpg", size: "100x100" %>
+                        <%= attachment_image_tag user, :profile_image,　format: 'jpeg', fallback: "/images/no_image.jpg", size: "60x60", class: "img-circle" %>
                         <% end %>
                     <% end %>
 					</div>
@@ -15,54 +16,74 @@
 				</tr>
 			</table>
         </div>
+        <div class ="col-md-2">
+        </div>
     </div>
     <div class="row">
-        <div class ="col-md-1">
-        	<p><%= attachment_image_tag @user, :profile_image,　format: 'jpeg', fallback: "no_image.jpg", size: "70x70" %></p>
-        </div>
-        <div class ="col-md-2">
-        	<p><%= @user.name %>のルーム<br>ユーザーid： <%= @user.id %></p>
-        </div>
-        <div class ="col-md-3">
-        	<p>いいね<br>
+        <div class ="col-md-5">
+            <div class="clearfix">
+        	<div class="pull-left"><%= attachment_image_tag @user, :profile_image,　format: 'jpeg', fallback: "/images/no_image.jpg", size: "70x70", class: "img-circle" %>
+            </div>
+            <div class="well well-sm pull-left hidarikuuhaku uekuuhaku">
+                <%= @user.name %>のルーム<br>ユーザーid： <%= @user.id %>
+            　<br>いいね
                 <% sum = 0 %>
                 <% @user.post_images.each do |post_image| %>
                     <% sum = post_image.favorites.size + sum %>
                 <% end %>
                 <%= sum %>
-            </p>
-        </div>
-        <div class ="col-md-2">
-            <section class="stats">
-              <%= render 'users/stats' %>
-            </section>
-        	<p>フォロワー</p>
-        </div>
-        <div class ="col-md-2">
-        	<div class="btn btn-info center-block btn-block">
-                <%= render 'follow_form' if user_signed_in? %>
-            フォロー
+            </div>
+            <i class="pull-left fa fa-users hidarikuuhaku uekuuhaku gazo btn btn-primary" aria-hidden="true"></i>
+            
             </div>
         </div>
-        <% if @user.id == current_user.id %>
-        <div class ="col-md-1">
-        	<%= link_to "編集", edit_user_path, class:"btn btn-success center-block btn-block" %>
-        </div>
-        <% end %>
-        <div class ="col-md-1">
-        	<%= link_to "退会", user_path(@user.id), method: :delete, class:"btn btn-danger center-block btn-block" %>
-        </div>
+          <div class="for_big">
+            <div class ="col-md-2">
+                    <section class="stats">
+                      <%= render 'users/stats' %>
+                    </section>
+            </div>
+            <div class ="col-md-2">
+                <%= render 'follow_form' if user_signed_in? %>
+            </div>
+            <% if @user.id == current_user.id %>
+            <div class ="col-md-1">
+            	<%= link_to "編集", edit_user_path, class: "btn btn-success center-block btn-block" %>
+            </div>
+            <div class ="col-md-2">
+                <%= link_to "画像投稿", new_post_image_path, class: "btn btn-warning center-block btn-block", tabindex: 3 %>
+            </div>
+            <% end %>
+          </div>
+
+
+          <div class="for_small kieru">
+            <div class ="col-xs-4">
+                    <section class="stats">
+                      <%= render 'users/stats' %>
+                    </section>
+            </div>
+            <div class ="col-xs-4">
+                <%= render 'follow_form' if user_signed_in? %>
+            </div>
+            <% if @user.id == current_user.id %>
+            <div class ="col-xs-4">
+                <%= link_to "編集", edit_user_path, class: "btn btn-success center-block btn-block" %><br>
+                <%= link_to "画像投稿", new_post_image_path, class: "btn btn-warning center-block btn-block", tabindex: 3 %>
+            </div>
+            <% end %>
+          </div>
     </div>
     <div class="row">
-	    <div class ="col-md-8">
-			<div style="height:600px; width:700px; background-color:blue; overflow-y:scroll;">
-				<div class="form-control">
+	    <div class ="col-md-7">
+			<div class="haikei kieru">
 					<% @post_images.each do |post_image| %>
-					<%= attachment_image_tag post_image, :image, size: "550x550" %><br>
-					<div class="well well-sm">
-					<%= post_image.caption %>
-					</div>
-                        <div class="well well-sm">
+                    <a href="<%= Refile.attachment_url(post_image, :image, format: 'jpg') %>", data-lity>
+					<%= attachment_image_tag post_image, :image, size: "370x400", class: "img-responsive center-block" %><br>
+                    </a>
+
+                    <div class="well well-sm text-center">
+					<%= post_image.caption %>：
                             <% if post_image.favorited_by?(current_user) %>
                                 <%= link_to post_image_favorites_path(post_image), method: :delete do %>
                                   <i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
@@ -75,18 +96,19 @@
                                   <%= post_image.favorites.count %> いいね
                                 <% end %>
                             <% end %>
-                        </div>
+                        <% if current_user == post_image.user %>
+                        <%= link_to "詳細", post_image_path(post_image.id), class: "btn-sm btn-info" %>
+                        <% end %>
+    				</div>
 					<% end %>
-				</div>
 			</div>
 		</div>
-	       <div class ="col-md-4">
-			<div style="height:600px; width:400px; background-color:red;  overflow-y:scroll;">
-				<div class="form-control">
+	       <div class ="col-md-5 kieru2">
+			<div class="haikei">
 				<% @user.post_comments.reverse.each do |post_comment| %>
 					<div class="well well-sm">
                         <%= link_to user_path(post_comment.user) do %>
-                        <%= attachment_image_tag post_comment.user, :profile_image,　format: 'jpeg', fallback: "no_image.jpg", size: "70x70" %>
+                        <%= attachment_image_tag post_comment.user, :profile_image,　format: 'jpeg', fallback: "/images/no_image.jpg", size: "70x70", class: "img-circle" %>
                         <% end %>
 						id：<%= post_comment.user.id %>
 						<%= post_comment.user.name %>
@@ -94,20 +116,17 @@
 						<%= post_comment.comment %>
 					</div>
 				<% end %>
-				</div>
 			</div>
 		</div>
     </div>
 
-    <div class="row">
-        <div class ="col-md-3">
-        	<%= link_to "画像投稿", new_post_image_path, class:"btn btn-info center-block btn-block", tabindex: 3 %>
-        </div>
+    <div class="row uekuuhaku kieru2">
+
         <%= form_for [@user, @post_comment] do |f| %>
-        <div class ="col-md-6 form-group">
-        	 <%= f.text_area :comment, class: "form-control",placeholder: "フリーコメント欄に入力 　※コメント打った後ならTABキーで再度入力待ちにできるよ！", tabindex: 1 %>
+        <div class ="col-md-7 form-group">
+        	 <%= f.text_area :comment, class: "form-control", placeholder: "フリーコメント欄に入力 　※コメント投稿後の場合TABキーで再度入力待ちにできます。", tabindex: 1 %>
         </div>
-        <div class ="col-md-3 form-group">
+        <div class ="col-md-5 form-group">
         	<%= f.submit "送信する",  class: "btn btn-info center-block btn-block", tabindex: 2 %>
         </div>
         <% end %>
